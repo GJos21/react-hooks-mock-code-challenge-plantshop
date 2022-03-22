@@ -22,11 +22,20 @@ function PlantPage() {
     setFilter(text);
   }
 
+  function handleNewPrice(updatedPlant) {
+    setPlants(plants.map((plant) => plant.id === updatedPlant.id ? updatedPlant : plant))
+  }
+
+  function handleDelete(id) {
+    setPlants(plants.filter((plant) => plant.id !== id ? true : false))
+
+  }
+
   return (
     <main>
       <NewPlantForm onAddPlant={handleAddPlant} />
       <Search onFilter={handleFilter} filterText={filter} />
-      <PlantList items={plants} filterText={filter} />
+      <PlantList items={plants} filterText={filter} onNewPrice={handleNewPrice} onDelete={handleDelete} />
     </main>
   );
 }
